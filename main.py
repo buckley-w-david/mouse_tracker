@@ -1,0 +1,34 @@
+from track import track
+from listener import KeyListener
+import argparse
+
+DEBUG               = False
+VK_ESCAPE           = 0x1B
+
+if __name__ == '__main__':
+    #Main argument parser
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--outfile', help="The history dump output by the tracking")
+    args = parser.parse_args()
+
+    '''
+    Memory usage was/still might be a concern. The ResourceLogger can be used to 
+    log the memory and CPU usage to ensure it stays reasonable.
+    '''
+    if DEBUG:
+        from resource_logging import ResourceLogger
+
+        logger = ResourceLogger()
+        logger.start()
+
+    #Listens for the escape key, and will signal when it happens
+    #Used to exit the program
+    listener = KeyListener(VK_ESCAPE)
+    listener.start()
+    if args.outfile:
+        track(listener, args.outfile)
+    else:
+        track(listener)
+
+    if DEBUG:
+        logger.stop()
