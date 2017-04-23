@@ -1,3 +1,7 @@
+# Output Files #
+################
+*.png
+
 # Compiled source #
 ###################
 *.com
