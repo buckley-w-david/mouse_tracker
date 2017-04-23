@@ -8,7 +8,8 @@ VK_ESCAPE           = 0x1B
 if __name__ == '__main__':
     #Main argument parser
     parser = argparse.ArgumentParser()
-    parser.add_argument('--outfile', help="The history dump output by the tracking")
+    parser.add_argument('--outfile', default="output\\plot.png",
+            help="The output visualization of your mouse movement, default='output\\plot.png'")
     args = parser.parse_args()
 
     '''
@@ -25,10 +26,7 @@ if __name__ == '__main__':
     #Used to exit the program
     listener = KeyListener(VK_ESCAPE)
     listener.start()
-    if args.outfile:
-        track(listener, args.outfile)
-    else:
-        track(listener)
+    track(args.outfile, listener)
 
     if DEBUG:
         logger.stop()

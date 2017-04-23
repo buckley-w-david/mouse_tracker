@@ -17,6 +17,7 @@ from PIL import Image
 
 #Patience
 from time import sleep
+import os
 
 #Number of batchs before a 'snapshot'
 COLLECTION_LIMIT    = 300 #pretty arbitrary choice
@@ -58,7 +59,7 @@ def update_plot(graph, ax, result):
 
     return new_composite
 
-def track(listener, outfile="output\\plot.png"):
+def track(outfile, listener):
     history = []
 
     last_point = []
@@ -116,4 +117,6 @@ def track(listener, outfile="output\\plot.png"):
         current += 1
         point_queue.task_done()
 
+    #Create required directories structure if not already present
+    os.makedirs(os.path.dirname(outfile), exist_ok=True)
     result.save(outfile)
