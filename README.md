@@ -9,4 +9,5 @@ usage: main.py [-h] [--outfile OUTFILE]
 
 optional arguments:
   -h, --help         show this help message and exit
-  --outfile OUTFILE
+  --outfile OUTFILE  The output visualization of your mouse movement,
+                     default='output\plot.png'
