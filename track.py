@@ -101,19 +101,20 @@ def track(outfile, listener):
         '''
         points = last_point + points
 
-        x, y = zip(*points)
+        x, y, state = zip(*points)
         for i in range(len(x)-1):
             '''
             The trick to the alpha stacking is here, we draw each line segment point to point as it's own
             plot, convienently matplotlib already handles overlapping plots in a nice looking way
             '''
-            ax.plot(x[i:i+2], y[i:i+2], alpha=0.1, lw=2, solid_capstyle="butt", c="b")
+            colour = 'r' if state[i] else 'b'
+            ax.plot(x[i:i+2], y[i:i+2], alpha=0.1, lw=2, solid_capstyle="butt", c=colour)
 
         if (current > COLLECTION_LIMIT):
             result = update_plot(graph, ax, result)
             current = 0
             
-        last_point = [(x[-1], y[-1])]
+        last_point = [(x[-1], y[-1], state[-1])]
         current += 1
         point_queue.task_done()
 

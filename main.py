@@ -3,7 +3,7 @@ from listener import KeyListener
 import argparse
 
 DEBUG               = False
-VK_ESCAPE           = 0x1B
+VK_OEM_3           = 0xC0
 
 if __name__ == '__main__':
     #Main argument parser
@@ -22,9 +22,9 @@ if __name__ == '__main__':
         logger = ResourceLogger()
         logger.start()
 
-    #Listens for the escape key, and will signal when it happens
+    #Listens for the tildé key, and will signal when it happens
     #Used to exit the program
-    listener = KeyListener(VK_ESCAPE)
+    listener = KeyListener(VK_OEM_3)
     listener.start()
     track(args.outfile, listener)
 
